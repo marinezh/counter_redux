@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+// import Main from "./Main";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCount } from "./features/counter/CounterSlice";
+import {
+  increment,
+  decrement,
+  resetAmount,
+} from "./features/counter/CounterSlice";
 
 function App() {
+  const count = useSelector(selectCount);
+  const dispatch = useDispatch();
+
+  // const addOneHandler = () => {};
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div>
+        <h1 className="counter">{count}</h1>
+      </div>
+      <div className="buttons">
+        <button onClick={() => dispatch(increment(1))}>Add one</button>
+        <button onClick={() => dispatch(increment(5))}>Add five</button>
+        <button onClick={() => dispatch(decrement(1))}>Remove one</button>
+        <button onClick={() => dispatch(decrement(5))}>Remove five</button>
+        <button onClick={() => dispatch(resetAmount())}>Reset</button>
+      </div>
     </div>
   );
 }
